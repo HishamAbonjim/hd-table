@@ -1,0 +1,27 @@
+<div>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col" *ngFor="let header of headers"> {{header}}</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows; let i = index; ">
+        <td *ngFor="let cell of row">
+          <select *ngIf="cell.tag =='select' && !cell.key " required="{{cell.requierd}}" class="form-control"
+            disabled="{{cell.disabled}}" [(ngModel)]="cell.value">
+            <option value="-1" selected> Chose </option>
+            <option *ngFor="let item  of cell.list" value="{{item.code}}"> {{item.value}} </option>
+          </select>
+          <input *ngIf="cell.tag =='input' && !cell.key " class="form-control" required="{{cell.requierd}}"
+            disabled="{{cell.disabled}}" type="{{cell.type}}" [(ngModel)]="cell.value"> </td>
+        <td> <button *ngIf="i!==0 &&  rowsOnEdit.indexOf(i)=='-1'" (click)="onEdit(i)"> edit </button> <button
+            *ngIf="i!==0 &&  rowsOnEdit.indexOf(i)=='-1'" (click)="onDelete(i)"> delete </button> <button *ngIf="i===0"
+            (click)="onAdd(i)"> add </button> <button *ngIf="i!==0 &&  rowsOnEdit.indexOf(i)!='-1'" (click)="onSave(i)">
+            save </button> </td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
