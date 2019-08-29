@@ -2,7 +2,7 @@
   <table class="table table-sm">
     <thead>
       <tr>
-        <th scope="col" *ngFor="let header of headers"> {{header}}</th>
+        <th scope="col" *ngFor="let header of Hrades"> {{header}}</th>
         <th> </th>
       </tr>
     </thead>
@@ -11,7 +11,7 @@
         <td *ngFor="let cell of row">
           <select *ngIf="cell.tag =='select' && !cell.key " required="{{cell.requierd}}" class="form-control"
             disabled="{{cell.disabled}}" [(ngModel)]="cell.value">
-            <option value="-1" selected> Chose </option>
+            <!-- <option value="-1" selected> Chose </option> -->
             <option *ngFor="let item  of cell.list" value="{{item.code}}"> {{item.value}} </option>
           </select>
           <input *ngIf="cell.tag =='input' && !cell.key " class="form-control" required="{{cell.requierd}}"

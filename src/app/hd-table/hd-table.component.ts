@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
+import { Component, OnInit, EventEmitter, Input, Output, ApplicationRef, ChangeDetectorRef } from "@angular/core";
 import * as _ from "lodash";
 
 
@@ -7,22 +7,28 @@ import * as _ from "lodash";
   templateUrl: "./hd-table.component.html",
   styleUrls: ["./hd-table.component.scss"]
 })
-export class HDTableComponent implements OnInit {
-  constructor() {}
+export class HDTableComponent   {
+
   tags = Tags;
   inputTypes = InputTypes;
-  onChange: EventEmitter<any> = new EventEmitter();
+
 
   tableSettings: TableSettings;
   rowsOnEdit = [];
-  // @Input() headers: any[];
-  headers: string[];
-  addHeaders(headers: string[]) {
-    this.headers = [...headers];
+  constructor(   private ref:ChangeDetectorRef){
+
   }
 
-    // @Input() rowStructureCells: Cell[] = [];
-    rowStructureCells: Cell[] = [];
+  headers ;
+  addHeaders(headers: string[]) {
+    this.headers =  headers ;
+    this.ref.detectChanges();
+  }
+  get Hrades():string [] {
+ return this.headers;
+  }
+
+  rowStructureCells: Cell[] = [];
   addColumn(
     columnName: string,
     tag: string = this.tags.input,
@@ -44,38 +50,16 @@ export class HDTableComponent implements OnInit {
     }
     this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , [] ,false))
   }
-  //  = [
-  //   "FinalProduct",
-  //   "ProductCapacity",
-  //   "ProductCapacityUnit",
-  //   "ProductCode"
-  // ];
 
-  // @Input() data: any[];
-
-  //[ {
-  //   "FinalProduct": "Oil Emulsion Anti Foam",
-  //   "ProductCapacity": "130",
-  //   "ProductCapacityUnit": "98",
-  //   "ProductCode": "AF420"
-  // },
-  // {
-  //   "FinalProduct": "w",
-  //   "ProductCapacity": "w",
-  //   "ProductCapacityUnit": "w",
-  //   "ProductCode": "w"
-  // }];
   @Output() deletedElement = new EventEmitter<any>();
   @Output() createdElement = new EventEmitter<any>();
   @Output() updatedElement = new EventEmitter<any>();
   rows = [];
-  //  rowStructueCells :Cell[]=[];
+  data ;
 
 
-  ngOnInit() {
 
-  }
-data ;
+
   createTable(key: string = "", data: any[] = null) {
     this.data   =data;
     this.createTableStructure();
@@ -89,43 +73,11 @@ data ;
         });
         this.rows.push(Cells);
       });
-    // this.rowCells = [] ;
-    //this.rows = this.rows.concat()
-    // this.headers = headers;
-    // this.key = key;
-    // this.rowCells.push(new Cell( "FinalProduct", "input", "", ""));
-    // this.rowCells.push(new Cell( "ProductCapacity", "input", "", ""));
-    // this.rowCells.push(new Cell( "ProductCapacityUnit", "input", "", ""));
-    // this.rowCells.push(new Cell( "ProductCode", "input", "", ""));
 
-    // this.rows.push(this.rowCells);
   }
 
-  // seedTableData(data) {
-  //   this.data = data;
-  //   if (this.data && this.data.length > 0)
-  //     this.data.forEach(e => {
-  //       let Cells = _.cloneDeep(this.rowStructureCells);
-  //       Cells.forEach(c => {
-  //         c.value = e[c.name];
-  //         c.disabled = true;
-  //         if (c.name === this.key) c.key = true;
-  //       });
-  //       this.rows.push(Cells);
-  //     });
-  // }
-  // onValueChange() {
-  //   this.onChange.emit("test");
-  // }
   createTableStructure() {
-    //  let cell  = new Cell( "ProductCapacityUnit", "select", "", "");
-    //  cell.list=[new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ]
-    //   this.rowStructueCells.push(new Cell( "FinalProduct", "input", "", ""));
-    //   this.rowStructueCells.push(new Cell( "ProductCapacity", "input", "", ""));
-    //   this.rowStructueCells.push(cell);
-    //   this.rowStructueCells.push(new Cell( "ProductCode", "input", "", ""));
-
-    this.rows.unshift(this.rowStructureCells);
+     this.rows.unshift(this.rowStructureCells);
   }
   onEdit(index) {
     this.rows[index].forEach(c =>
@@ -148,8 +100,6 @@ data ;
       return e !== index;
     });
 
-    // this.createTable();
-    /// emmit the holl value to be saved again ,
   }
 
   onAdd(index) {
@@ -167,7 +117,6 @@ data ;
       c.disabled = false;
     });
     this.rows.unshift(newRowStructure);
-    /// emmit the holl value to be saved again ,
   }
   onDelete(index) {
     this.deletedElement.emit(this.getTheTargetedJson(index));

@@ -5,7 +5,7 @@ import { Cell, CellList, HDTableComponent } from './hd-table/hd-table.component'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements  AfterViewInit {
   title = 'hd-table';
   //  product Table   // #D step 1  initiate Table
   rowStructureCells: Cell[] = []; // #D here is the structure for the columns heach column type and initial values will be here
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   // End Of Product Table
 
 
-  @ViewChild(HDTableComponent , { static:false} ) HDTable;
+  @ViewChild(HDTableComponent , {static: false , read:false}  ) HDTable;
 
   ngAfterViewInit(){
      this.products =  [{
@@ -38,21 +38,21 @@ export class AppComponent implements OnInit, AfterViewInit {
         "ProductCapacityUnit": "2",
         "ProductCode": "w"
       }];
+      this.HDTable.addHeaders( [ //#D headers
+        "Final Product",
+        "Product Capacity",
+        "Product CapacityUnit",
+        "Product Code"
+      ]);
+
           this.createProductsTable();// #D create table
           this.HDTable.createTable("Id",  this.products );
 
 
   }
-ngOnInit(){
 
-}
   createProductsTable() {
-    this.HDTable.addHeaders( [ //#D headers
-      "Final Product",
-      "Product Capacity",
-      "Product CapacityUnit",
-      "Product Code"
-    ]);
+
 
     // let cell = new Cell(
     //   "ProductCapacityUnit",
@@ -62,11 +62,12 @@ ngOnInit(){
     // [new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ],
     // false
     // );
+
     this.HDTable.addColumn("FinalProduct", "input" ); // #D by defult type string
     this.HDTable.addColumn("ProductCapacity ", "input", "number" );  // #D Coumn name and type and input format
 
     this.HDTable.addColumn("ProductCapacityUnit" , "select" , "" , [{key: "ton" ,value: "10" } , {key: "Kig" ,  value:20 }]  , "key" , "value" );
-    this.HDTable.addColumn("ProductCode", this.HDTable.tags.input, "number");
+    this.HDTable.addColumn("ProductCode", this.HDTable.tags.input, this.HDTable.inputTypes.input);
    //  this.rowStructureCells.push(new Cell("ProductCode", "input", "number", []));
 
    this.HDTable.addColumn("Id" , this.HDTable.tags.input ,this.HDTable.inputTypes.hidden);
@@ -80,7 +81,10 @@ ngOnInit(){
   }
 
   onCreate($event) {
+    debugger ;
+  console.log("sss")
     $event["Status"] = "C";
+
     // this.input.ModonProducts.push($event)
   }
   onDelete($event) {
