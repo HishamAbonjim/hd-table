@@ -1,19 +1,49 @@
 import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
 import * as _ from "lodash";
 
+
 @Component({
-  selector: "inputs-table",
-  templateUrl: "./inputs-table.component.html",
-  styleUrls: ["./inputs-table.component.scss"]
+  selector: "hd-table",
+  templateUrl: "./hd-table.component.html",
+  styleUrls: ["./hd-table.component.scss"]
 })
-export class InputsTableComponent implements OnInit {
+export class HDTableComponent implements OnInit {
   constructor() {}
+  tags = Tags;
+  inputTypes = InputTypes;
   onChange: EventEmitter<any> = new EventEmitter();
 
   tableSettings: TableSettings;
   rowsOnEdit = [];
-  @Input() headers: any[];
+  // @Input() headers: any[];
+  headers: string[];
+  addHeaders(headers: string[]) {
+    this.headers = [...headers];
+  }
 
+    // @Input() rowStructureCells: Cell[] = [];
+    rowStructureCells: Cell[] = [];
+  addColumn(
+    columnName: string,
+    tag: string = this.tags.input,
+    inputTextType: string =this.inputTypes.text,
+    key: boolean = false,
+    keyValuePairLookups: [] =[]  ,
+    pairKey: string ,
+    pairValue: string
+  ) {
+
+   if(tag ==='select')
+    {
+     let lookups =[];
+      for ( let lkp  in  keyValuePairLookups  ){
+       lookups.push( new CellList(keyValuePairLookups[lkp][pairKey] , keyValuePairLookups[lkp][pairValue]));
+      }
+      this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , lookups ,key))
+      return ;
+    }
+    this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , [] ,key))
+  }
   //  = [
   //   "FinalProduct",
   //   "ProductCapacity",
@@ -40,14 +70,11 @@ export class InputsTableComponent implements OnInit {
   @Output() updatedElement = new EventEmitter<any>();
   rows = [];
   //  rowStructueCells :Cell[]=[];
-  @Input() rowStructureCells: Cell[] = [];
+
   @Input() key: string = "";
   ngOnInit() {
     this.createTable();
   }
-
-
-
 
   createTable(key: string = "", data: any[] = null) {
     this.createTableStructure();
@@ -73,7 +100,7 @@ export class InputsTableComponent implements OnInit {
     // this.rows.push(this.rowCells);
   }
 
-    seedTableData(data) {
+  seedTableData(data) {
     this.data = data;
     if (this.data && this.data.length > 0)
       this.data.forEach(e => {
@@ -86,9 +113,9 @@ export class InputsTableComponent implements OnInit {
         this.rows.push(Cells);
       });
   }
-  onValueChange() {
-    this.onChange.emit("test");
-  }
+  // onValueChange() {
+  //   this.onChange.emit("test");
+  // }
   createTableStructure() {
     //  let cell  = new Cell( "ProductCapacityUnit", "select", "", "");
     //  cell.list=[new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ]
@@ -192,3 +219,23 @@ export class TableSettings {
 export class CellList {
   constructor(public value: string = "", public code: string = "") {}
 }
+
+export const Tags =  {
+  input: 'input' ,
+  select : 'select'
+}
+export const InputTypes = {
+  text:'text',
+  number:'number' ,
+  password:'password',
+  date:'date',
+  email:'email',
+  month:'month',
+  range:'range',
+  search:'search',
+  tel:'tel',
+  time:'time',
+  url:'url',
+  week:'week'
+}
+

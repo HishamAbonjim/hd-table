@@ -1,5 +1,5 @@
 import { Component , AfterViewInit ,ViewChild, OnInit} from '@angular/core';
-import { Cell, CellList, HDTableComponent } from './hd-table/hd-table.component';
+import { Cell, CellList, InputsTableComponent } from './inputs-table/inputs-table.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   // End Of Product Table
 
 
-  @ViewChild(HDTableComponent , { static:false} ) HDTable;
+  @ViewChild(InputsTableComponent , { static:false} ) inputsTable;
 
   ngAfterViewInit(){
      this.products =  [{
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         "ProductCode": "w"
       }];
           this.createProductsTable();// #D create table
-          this.HDTable.seedTableData(this.products);
+          this.inputsTable.seedTableData(this.products);
 
 
   }
@@ -47,29 +47,28 @@ ngOnInit(){
 
 }
   createProductsTable() {
-    this.HDTable.addHeaders( [ //#D headers
+    this.header = [ //#D headers
       "Final Product",
       "Product Capacity",
       "Product CapacityUnit",
       "Product Code"
-    ]);
+    ];
 
-    // let cell = new Cell(
-    //   "ProductCapacityUnit",
-    //   "select",
-    //   "",
-    // //   this.form5Service.productUnit as (CellList[]), //#D here it contain a list of lookups :D
-    // [new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ],
-    // false
-    // );
-    this.HDTable.addColumn("FinalProduct", "input" ); // #D by defult type string
-    this.HDTable.addColumn("name ", "input", "number" );  // #D Coumn name and type and input format
+    let cell = new Cell(
+      "ProductCapacityUnit",
+      "select",
+      "",
+    //   this.form5Service.productUnit as (CellList[]), //#D here it contain a list of lookups :D
+    [new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ],
+    false
+    );
 
-    this.HDTable.addColumn("ProductCapacityUnit" , "select" , "" ,false , [{key: "ton" ,value: "10" } , {key: "Kig" ,  value:20 }]  , "key" , "value" );
-    this.HDTable.addColumn("ProductCode", "input", "number");
-   //  this.rowStructureCells.push(new Cell("ProductCode", "input", "number", []));
+    this.rowStructureCells.push(new Cell("FinalProduct", "input", "", [])); // #D by defult type string
+    this.rowStructureCells.push(new Cell("ProductCapacityUnit", "input", "number", []));  // #D Coumn name and type and input format
+    this.rowStructureCells.push(cell);
+    this.rowStructureCells.push(new Cell("ProductCode", "input", "number", []));
 
-   //  this.rowStructureCells.push(new Cell("Id", "input", "", null, true));
+    this.rowStructureCells.push(new Cell("Id", "input", "", null, true));
 
     //  let cell  = new Cell( "ProductCapacityUnit", "select", "", "");
     //  cell.list=[new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ]

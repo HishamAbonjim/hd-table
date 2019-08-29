@@ -4,12 +4,12 @@
 Here we begin
 </div>
 
-<inputs-table [rowStructureCells] = "rowStructureCells"
+<hd-table
 [data] = "products"
 (deletedElemrnt)="onDelete($event)"
 (createdElemrnt)="onCreate($event)"
 (updatedElemrnt)="onUpdate($event)"
-[headers]="header"
+
 [key] = "productKey"
-> </inputs-table>
+> </hd-table>
 
