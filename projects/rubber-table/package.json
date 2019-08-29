@@ -1,0 +1,11 @@
+{
+  "name": "rubber-table",
+  "version": "1.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.2.3",
+    "@angular/core": "^8.2.3"
+  },
+  "author": [{  "name": "Danyah","url": "https://github.com/ddawsari"  } ,
+  {"name":"hisham" , "url":"https://github.com/HishamAbonjim"}
+  ]
+}

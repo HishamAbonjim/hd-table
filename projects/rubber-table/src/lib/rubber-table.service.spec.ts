@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TableService } from './table.service';
+import { RubberTableService } from './rubber-table.service';
 
-describe('TableService', () => {
+describe('RubberTableService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TableService = TestBed.get(TableService);
+    const service: RubberTableService = TestBed.get(RubberTableService);
     expect(service).toBeTruthy();
   });
 });

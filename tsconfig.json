@@ -24,6 +24,12 @@
       ],
       "table/*": [
         "dist/table/*"
+      ],
+      "rubber-table": [
+        "dist/rubber-table"
+      ],
+      "rubber-table/*": [
+        "dist/rubber-table/*"
       ]
     }
   },

@@ -1,0 +1,27 @@
+<div class="hd-table-div">
+  <table class="table table-sm hd-table">
+    <thead class="hd-table-header">
+      <tr class="hd-table-header-tr">
+        <th class="hd-table-header-th" scope="col" *ngFor="let header of headers"> {{header}}</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hd-table-row" *ngFor="let row of rows; let i = index; ">
+        <td  class="hd-table-td"*ngFor="let cell of row">
+          <select class="hd-table-select" *ngIf="cell.tag =='select' && !cell.key " required="{{cell.requierd}}" class="form-control"
+            disabled="{{cell.disabled}}" [(ngModel)]="cell.value">
+            <!-- <option value="-1" selected> Chose </option> -->
+            <option class="hd-table-select-option"  *ngFor="let item  of cell.list" value="{{item.code}}"> {{item.value}} </option>
+          </select>
+          <input class="hd-table-input" *ngIf="cell.tag =='input' && !cell.key" class="form-control" required="{{cell.requierd}}"
+            disabled="{{cell.disabled}}" type="{{cell.type}}" [(ngModel)]="cell.value"> </td>
+        <td> <button class="hd-table-btn-edit" *ngIf="i!==0 &&  rowsOnEdit.indexOf(i)===-1" (click)="onEdit(i)"> edit </button> <button
+          class="hd-table-btn-delete" *ngIf="i!==0 &&  rowsOnEdit.indexOf(i)===-1" (click)="onDelete(i)"> delete </button> <button *ngIf="i===0"
+            (click)="onAdd(i)" class="hd-table-btn-add"> add </button> <button  class="hd-table-btn-save" *ngIf="i!==0 &&  rowsOnEdit.indexOf(i) !== -1" (click)="onSave(i)">
+            save </button> </td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>

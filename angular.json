@@ -155,6 +155,41 @@
           }
         }
       }
+    },
+    "rubber-table": {
+      "projectType": "library",
+      "root": "projects/rubber-table",
+      "sourceRoot": "projects/rubber-table/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/rubber-table/tsconfig.lib.json",
+            "project": "projects/rubber-table/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rubber-table/src/test.ts",
+            "tsConfig": "projects/rubber-table/tsconfig.spec.json",
+            "karmaConfig": "projects/rubber-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/rubber-table/tsconfig.lib.json",
+              "projects/rubber-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "hd-table"
 }

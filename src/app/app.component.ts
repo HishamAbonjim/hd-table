@@ -1,5 +1,6 @@
 import { Component , AfterViewInit ,ViewChild, OnInit} from '@angular/core';
 import { Cell, CellList, HDTableComponent } from './hd-table/hd-table.component';
+import {RubberTableComponent} from 'rubber-table';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,7 +22,7 @@ export class AppComponent implements  AfterViewInit {
   // End Of Product Table
 
 
-  @ViewChild(HDTableComponent , {static: false , read:false}  ) HDTable;
+  @ViewChild(RubberTableComponent , {static: false , read:false}  ) HDTable;
 
   ngAfterViewInit(){
      this.products =  [{
