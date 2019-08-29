@@ -27,7 +27,7 @@ export class HDTableComponent implements OnInit {
     columnName: string,
     tag: string = this.tags.input,
     inputTextType: string =this.inputTypes.text,
-    key: boolean = false,
+   //  key: boolean = false,
     keyValuePairLookups: [] =[]  ,
     pairKey: string ,
     pairValue: string
@@ -39,10 +39,10 @@ export class HDTableComponent implements OnInit {
       for ( let lkp  in  keyValuePairLookups  ){
        lookups.push( new CellList(keyValuePairLookups[lkp][pairKey] , keyValuePairLookups[lkp][pairValue]));
       }
-      this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , lookups ,key))
+      this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , lookups ,false))
       return ;
     }
-    this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , [] ,key))
+    this.rowStructureCells.push(new Cell(columnName,tag ,inputTextType , [] ,false))
   }
   //  = [
   //   "FinalProduct",
@@ -51,7 +51,7 @@ export class HDTableComponent implements OnInit {
   //   "ProductCode"
   // ];
 
-  @Input() data: any[];
+  // @Input() data: any[];
 
   //[ {
   //   "FinalProduct": "Oil Emulsion Anti Foam",
@@ -71,20 +71,21 @@ export class HDTableComponent implements OnInit {
   rows = [];
   //  rowStructueCells :Cell[]=[];
 
-  @Input() key: string = "";
-  ngOnInit() {
-    this.createTable();
-  }
 
+  ngOnInit() {
+
+  }
+data ;
   createTable(key: string = "", data: any[] = null) {
+    this.data   =data;
     this.createTableStructure();
-    if (this.data && this.data.length > 0)
-      this.data.forEach(e => {
+    if ( this.data &&  this.data.length > 0)
+    this.data.forEach(e => {
         let Cells = _.cloneDeep(this.rowStructureCells);
         Cells.forEach(c => {
-          c.value = e[c.name];
+          c.value = e[c.name.trim()];
           c.disabled = true;
-          if (c.name === this.key) c.key = true;
+          if (c.name === key) c.key = true;
         });
         this.rows.push(Cells);
       });
@@ -100,19 +101,19 @@ export class HDTableComponent implements OnInit {
     // this.rows.push(this.rowCells);
   }
 
-  seedTableData(data) {
-    this.data = data;
-    if (this.data && this.data.length > 0)
-      this.data.forEach(e => {
-        let Cells = _.cloneDeep(this.rowStructureCells);
-        Cells.forEach(c => {
-          c.value = e[c.name];
-          c.disabled = true;
-          if (c.name === this.key) c.key = true;
-        });
-        this.rows.push(Cells);
-      });
-  }
+  // seedTableData(data) {
+  //   this.data = data;
+  //   if (this.data && this.data.length > 0)
+  //     this.data.forEach(e => {
+  //       let Cells = _.cloneDeep(this.rowStructureCells);
+  //       Cells.forEach(c => {
+  //         c.value = e[c.name];
+  //         c.disabled = true;
+  //         if (c.name === this.key) c.key = true;
+  //       });
+  //       this.rows.push(Cells);
+  //     });
+  // }
   // onValueChange() {
   //   this.onChange.emit("test");
   // }
@@ -127,7 +128,10 @@ export class HDTableComponent implements OnInit {
     this.rows.unshift(this.rowStructureCells);
   }
   onEdit(index) {
-    this.rows[index].forEach(c => {
+    this.rows[index].forEach(c =>
+      {
+        if (c.key )
+        return ;
       c.disabled = false;
       c.value = "";
       c.editMode = true;
@@ -236,6 +240,7 @@ export const InputTypes = {
   tel:'tel',
   time:'time',
   url:'url',
-  week:'week'
+  week:'week',
+  hidden:"hidden"
 }
 
