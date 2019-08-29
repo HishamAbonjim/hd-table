@@ -57,9 +57,6 @@ export class HDTableComponent   {
   rows = [];
   data ;
 
-
-
-
   createTable(key: string = "", data: any[] = null) {
     this.data   =data;
     this.createTableStructure();
@@ -99,7 +96,6 @@ export class HDTableComponent   {
     this.rowsOnEdit = this.rowsOnEdit.filter(e => {
       return e !== index;
     });
-
   }
 
   onAdd(index) {
