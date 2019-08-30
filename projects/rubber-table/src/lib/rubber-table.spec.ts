@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputsTableComponent } from './inputs-table.component';
+import { RubberTable } from './rubber-table';
 
-describe('InputsTableComponent', () => {
-  let component: InputsTableComponent;
-  let fixture: ComponentFixture<InputsTableComponent>;
+describe('RubberTable', () => {
+  let component: RubberTable;
+  let fixture: ComponentFixture<RubberTable>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputsTableComponent ]
+      declarations: [ RubberTable ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputsTableComponent);
+    fixture = TestBed.createComponent(RubberTable);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

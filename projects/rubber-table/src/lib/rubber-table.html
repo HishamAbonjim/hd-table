@@ -1,4 +1,4 @@
-<div class="hd-table-div">
+<div class="hd-table-div-container">
   <table class="table table-sm hd-table">
     <thead class="hd-table-header">
       <tr class="hd-table-header-tr">
@@ -6,9 +6,9 @@
         <th> </th>
       </tr>
     </thead>
-    <tbody>
-      <tr class="hd-table-row" *ngFor="let row of rows; let i = index; ">
-        <td  class="hd-table-td"*ngFor="let cell of row">
+    <tbody class="hd-table-tbody">
+      <tr class="hd-table-tbody-row" *ngFor="let row of rows; let i = index; ">
+        <td  class="hd-table-tbody-td"*ngFor="let cell of row">
           <select class="hd-table-select" *ngIf="cell.tag =='select' && !cell.key " required="{{cell.requierd}}" class="form-control"
             disabled="{{cell.disabled}}" [(ngModel)]="cell.value">
             <!-- <option value="-1" selected> Chose </option> -->

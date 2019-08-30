@@ -1,6 +1,6 @@
 import { Component , AfterViewInit ,ViewChild, OnInit} from '@angular/core';
 import { Cell, CellList, HDTableComponent } from './hd-table/hd-table.component';
-import {RubberTableComponent} from 'rubber-table';
+import {RubberTable} from 'rubber-table';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,7 +22,7 @@ export class AppComponent implements  AfterViewInit {
   // End Of Product Table
 
 
-  @ViewChild(RubberTableComponent , {static: false , read:false}  ) HDTable;
+  @ViewChild(RubberTable , {static: false , read:false}  ) HDTable;
 
   ngAfterViewInit(){
      this.products =  [{
@@ -47,7 +47,23 @@ export class AppComponent implements  AfterViewInit {
       ]);
 
           this.createProductsTable();// #D create table
-          this.HDTable.createTable("Id",  this.products );
+          // in the first argumeant we passed the column Id Name
+          //and in the second argument we put the old values in the table in case there are any
+          //<strong> Note Json props have the same name as the defined columns in the previous step </strong>
+          this.HDTable.createTable("Id",  [{
+            "Id" : "1",
+             "FinalProduct": "Oil Emulsion Anti Foam",
+             "ProductCapacity": "130",
+             "ProductCapacityUnit": "98",
+             "ProductCode": "AF420"
+           },
+           {
+             "Id" : "2",
+             "FinalProduct": "toy",
+             "ProductCapacity": "2",
+             "ProductCapacityUnit": "2",
+             "ProductCode": "tt32"
+           }] );
 
 
   }
@@ -63,14 +79,16 @@ export class AppComponent implements  AfterViewInit {
     // [new CellList(" ton " , "2" ) ,  new CellList(" kig " , "3" ) ],
     // false
     // );
+ //  the first pram is the column name (used as jsoon prop key )  by defult tag will be input & type will be text
+    this.HDTable.addColumn("FinalProduct"  );
+     // specify the column tag and input type
+    this.HDTable.addColumn("ProductCode", this.HDTable.tags.input, this.HDTable.inputTypes.text);
+    this.HDTable.addColumn("ProductCapacityUnit" , this.HDTable.tags.select , "" , [{key: "ton" ,value: "10" } , {key: "Kig" ,  value:20 }]  , "key" , "value" );
+    this.HDTable.addColumn("ProductCapacity ",  this.HDTable.tags.input, this.HDTable.inputTypes.number );  // #D Coumn name and type and input format
 
-    this.HDTable.addColumn("FinalProduct", "input" ); // #D by defult type string
-    this.HDTable.addColumn("ProductCapacity ", "input", "number" );  // #D Coumn name and type and input format
+     // in select tag we have to pass the lookups values for the in the column definition in the 4th column and key & value in 5th & 6th
 
-    this.HDTable.addColumn("ProductCapacityUnit" , "select" , "" , [{key: "ton" ,value: "10" } , {key: "Kig" ,  value:20 }]  , "key" , "value" );
-    this.HDTable.addColumn("ProductCode", this.HDTable.tags.input, this.HDTable.inputTypes.input);
-   //  this.rowStructureCells.push(new Cell("ProductCode", "input", "number", []));
-
+   // for the primary key (Ids) column: add the hidden type in case if u want to hide the column
    this.HDTable.addColumn("Id" , this.HDTable.tags.input ,this.HDTable.inputTypes.hidden);
 
     //  let cell  = new Cell( "ProductCapacityUnit", "select", "", "");
@@ -82,20 +100,16 @@ export class AppComponent implements  AfterViewInit {
   }
 
   onCreate($event) {
-    debugger ;
-  console.log("sss")
-    $event["Status"] = "C";
-
-    // this.input.ModonProducts.push($event)
+    $event["Status"] = "CREATE";  // add flage to distinguish the action
+   //  this.productsResult.push($event)
   }
   onDelete($event) {
-    $event["Status"] = "D";
-  //  this.input.ModonProducts.push($event)
+    $event["Status"] = "DELETE";
+ ///  this.productsResult.push($event)
   }
   onUpdate($event) {
-    $event["Status"] = "U";
-    // this.input.ModonProducts.push($event)
-
+    $event["Status"] = "UPDATE";
+ //     this.productsResult.push($event)
 }
 
 }

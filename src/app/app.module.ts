@@ -7,14 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { InputsTableComponent } from './inputs-table/inputs-table.component';
 
 import {HDTableComponent } from './hd-table/hd-table.component';
-import {RubberTableComponent} from 'rubber-table';
+import {RubberTable} from 'rubber-table';
 
 @NgModule({
   declarations: [
     AppComponent ,
     InputsTableComponent,
     HDTableComponent,
-    RubberTableComponent
+    RubberTable
   ],
   imports: [
     BrowserModule ,

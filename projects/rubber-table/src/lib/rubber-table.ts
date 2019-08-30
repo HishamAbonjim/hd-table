@@ -5,10 +5,10 @@ import * as _ from "lodash";
 
 @Component({
   selector: 'hd-rubber-table',
-  templateUrl: './rubber-table.component.html',
-  styleUrls: ["./rubber-table.component.css"]
+  templateUrl: './rubber-table.html',
+  styleUrls: ["./rubber-table.css"]
 })
-export class RubberTableComponent   {
+export class RubberTable{
 
   tags = Tags;
   inputTypes = InputTypes;
