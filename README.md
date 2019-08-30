@@ -1,7 +1,7 @@
-# Rubber Table
+# Rubber Table 
 
 The sources for this package are in the main Angular Material repo. Please file issues and pull requests against that repo. [HD Rubber Table ](https://github.com/HishamAbonjim/hd-table) version 1.0.3.
----
+
 
 ## Installation
 
