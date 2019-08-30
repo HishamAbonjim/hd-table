@@ -11,7 +11,7 @@ The library is available as npm package, so all you need to do is to run the fol
 npm install rubber-table 
 ```
 This command will create a record in your `package.json` file and install the package into the npm modules folder.
----
+ 
 ## Setup Example
 
 First thing you need to do is to import the rubber-table directives into your component.
@@ -39,7 +39,7 @@ Then register it by adding to the list of directives of your module:
 })
 // ...
 ```
----
+ 
 ## Usage 
  <strong> here are the steps: :D </steong>
 * Import RubberTable in the desired  component 
@@ -121,8 +121,7 @@ ngAfterViewInit(){
 
 ```
 
---- 
----
+ 
 # Features 
 ## Supported Tags
    * input 
@@ -162,6 +161,6 @@ you can change any element styles using the already defined classes in the html 
  * hd-table-btn-save
 
 
- --- 
+ 
 ###### toti toti :D  
  
