@@ -120,7 +120,7 @@ ngAfterViewInit(){
 }
 
 ```
-<strong> That's it :D  </strong>
+
 --- 
 ---
 # Features 
