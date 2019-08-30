@@ -1,6 +1,6 @@
-# RubberTable
+# Rubber Table
 
-The sources for this package are in the main Angular Material repo. Please file issues and pull requests against that repo. [Angular CLI](https://github.com/HishamAbonjim/hd-table) version 1.0.3.
+The sources for this package are in the main Angular Material repo. Please file issues and pull requests against that repo. [HD Rubber Table ](https://github.com/HishamAbonjim/hd-table) version 1.0.3.
 
 ## Installation
 
@@ -159,6 +159,6 @@ you can change any element styles using the already defined classes in the html 
  * hd-table-btn-save
 
 
-
-<label style="color:white"> توتي توتي خلصت الحتوتي  </label> 
- 
+```diff
+<span style="color:white"> توتي توتي خلصت الحتوتي  </span> 
+ ``` 

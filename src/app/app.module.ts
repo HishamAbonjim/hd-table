@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
-import { InputsTableComponent } from './inputs-table/inputs-table.component';
+
 
 import {HDTableComponent } from './hd-table/hd-table.component';
 import {RubberTable} from 'rubber-table';
@@ -12,7 +12,7 @@ import {RubberTable} from 'rubber-table';
 @NgModule({
   declarations: [
     AppComponent ,
-    InputsTableComponent,
+
     HDTableComponent,
     RubberTable
   ],
