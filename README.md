@@ -159,6 +159,6 @@ you can change any element styles using the already defined classes in the html 
  * hd-table-btn-save
 
 
-```diff
+ 
 <span style="color:white"> توتي توتي خلصت الحتوتي  </span> 
- ``` 
+ 
