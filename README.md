@@ -1,21 +1,22 @@
 # Rubber Table
 
 The sources for this package are in the main Angular Material repo. Please file issues and pull requests against that repo. [HD Rubber Table ](https://github.com/HishamAbonjim/hd-table) version 1.0.3.
+---
 
 ## Installation
 
 The library is available as npm package, so all you need to do is to run the following command:
 
-```
+```typescript
 npm install rubber-table 
 ```
 This command will create a record in your `package.json` file and install the package into the npm modules folder.
-
-## Minimal Setup Example
+---
+## Setup Example
 
 First thing you need to do is to import the rubber-table directives into your component.
 
-```
+```typescript
 
 import {RubberTable} from 'rubber-table';
 
@@ -23,7 +24,7 @@ import {RubberTable} from 'rubber-table';
 
 Then register it by adding to the list of directives of your module:
 
-```
+```typescript
 // ...
 
 @NgModule({
@@ -38,32 +39,33 @@ Then register it by adding to the list of directives of your module:
 })
 // ...
 ```
+---
 ## Usage 
  <strong> here are the steps: :D </steong>
 * Import RubberTable in the desired  component 
-```
+```typescript
 import {RubberTableComponent} from 'rubber-table'; 
 ```
 
 * Import AfterViewInit and ViewChild  from  '@angular/core' 
 
-```
+```typescript
 import {  AfterViewInit ,ViewChild} from '@angular/core';
 
 ```
 
 * implement AfterViewInit
-```
+```typescript
 export class AppComponent implements  AfterViewInit {
 ```
 * define RubberTable in component 
 
-```
+```typescript
  @ViewChild(RubberTable , {static: false , read:false}  ) HDTable;
 ```
 * adding table headers  
 
-```
+```typescript
 ngAfterViewInit(){ 
    this.HDTable.addHeaders( [ //#D headers
         "Final Product",
@@ -76,7 +78,7 @@ ngAfterViewInit(){
 ```
 
 * adding table skeleton in ngAfterViewInit() 
-```
+```typescript
 ngAfterViewInit(){ 
  //  the first pram is the column name (used as json prop key )  by defult tag will be input & type will be text 
     this.HDTable.addColumn("FinalProduct"  );
@@ -92,7 +94,7 @@ ngAfterViewInit(){
 } 
 ```
 * finaly  the template 
-```
+```typescript
 // in the template add the event emitters (createdElement) , (updatedElement) & (deletedElement)
 <hd-rubber-table
 (deletedElement)="onDelete($event)"
@@ -101,7 +103,7 @@ ngAfterViewInit(){
 ```
 
 * last piece in the component 
-``` 
+```typescript 
 // from the event emitters  (createdElement) , (updatedElement) & (deletedElement) you will reseive the change object or the added object 
 // example: 
   onCreate($event) {
@@ -119,7 +121,8 @@ ngAfterViewInit(){
 
 ```
 <strong> That's it :D  </strong>
-
+--- 
+---
 # Features 
 ## Supported Tags
    * input 
@@ -159,6 +162,6 @@ you can change any element styles using the already defined classes in the html 
  * hd-table-btn-save
 
 
- 
-<span style="color:white"> توتي توتي خلصت الحتوتي  </span> 
+ --- 
+###### toti toti :D  
  
